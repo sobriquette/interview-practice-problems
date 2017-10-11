@@ -37,9 +37,11 @@ def merge(arr, low, mid, high):
 		j += 1
 		k += 1
 
+
 def merge_sort_recursive(arr, low, high):
 	"""
 		Recursive implementation of mergesort
+		Implementation of mergesort
 		type: list
 		rtype: list
 

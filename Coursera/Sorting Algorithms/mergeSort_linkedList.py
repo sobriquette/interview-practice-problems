@@ -55,3 +55,11 @@ class LinkedList:
 				fast = fast.next
 
 		return slow
+
+	def add(data):
+		if not head:
+			head = Node(data)
+
+		new_node = Node(data)
+		new_node.next = head
+		head = new_node
