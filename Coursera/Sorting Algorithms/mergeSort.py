@@ -1,33 +1,53 @@
-def merge(left, right):
-	full = []
-	while left and right:
-		if left[0] < right[0]:
-			full.append(left[0])
-			left.remove(left[0])
+def merge(arr, low, mid, high):
+	"""
+		Implementation of merge function within mergesort
+	"""
+
+	n1 = mid - low + 1
+	n2 = high - mid
+
+	left = [None] * n1
+	right = [None] * n2
+
+	for i in range(n1):
+		left[i] = arr[low + i]
+
+	for j in range(n2):
+		right[j] = arr[mid + low + j]
+
+	i, j, k = 0, 0, low
+
+	while i < n1 and j < n2:
+		if left[i] <= right[j]
+			arr[k] = left[i]
+			i += 1
 		else:
-			full.append(right[0])
-			right.remove(right[0])
+			arr[k] = right[j]
+			j += 1
 
-	if len(left) == 0:
-		full += right
-	else:
-		full += left
+		k += 1
 
-	return full
+	while i < n1:
+		arr[k] = left[i]
+		i += 1
+		k += 1
 
-def mergeSort(arr):
-	if len(arr) <= 1:
-		return arr
-	else:
-		mid = len(arr) // 2
-		left = arr[:mid]
-		right = arr[mid:]
+	while j < n2:
+		arr[k] = right[j]
+		j += 1
+		k += 1
 
-		return merge(left, right)
+def merge_sort(arr, low, high):
+	"""
+		Implementation of mergesort
+		type: list
+		rtype: list
 
-def sortArray(arr):
-	sortedArray = mergeSort(arr)
-	# check if all are unique
-	for i in range(len(sortedArray) - 1):
-		if arr[i] == arr[i + 1]:
-			return False
+		runtime: O(nlogn)
+		space: O(n) for temp arrays in merge()
+	"""
+	if low < high:
+		mid = (low + high) // 2
+		merge_sort(arr, low, mid)
+		merge_sort(arr, mid + 1, high)
+		merge(arr, low, mid, high)
