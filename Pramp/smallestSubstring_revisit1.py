@@ -1,4 +1,5 @@
 def get_shortest_unique_substring(arr, string):
+	string = string.lower()
 	seen = {c: 0 for c in arr}
 	start = 0
 	num_unique_chars = 0
@@ -35,14 +36,15 @@ def get_shortest_unique_substring(arr, string):
 
 			start += 1
 	
-	return result
+	if result == "":
+		return -1
+	else:
+		return result
 
 if __name__=="__main__":
-	arr1 = ['x', 'y', 'z']
-	string1 = 'xyyzyzyx'
-
-	print(get_shortest_unique_substring(arr1, string1) == 'zyx')
-
-	arr2 = ['a']
-	string2 = 'a'
-	print(get_shortest_unique_substring(arr2, string2) == 'a')
+	char_arrs = [['x', 'y', 'z'], ['a'], ['a'], ['a'], ['a', 'b', 'c'], \
+				 ['a', 'b', 'c', 'e', 'k', 'i'], ['x', 'y', 'z', 'r']]
+	strings = ['xyyzyzyx', '', 'a', 'b', 'ADOBECODEBANCDDD', 'KADOBECODEBANCDDDEI', 'xyyzyzyx']
+	
+	for i in range(len(char_arrs)):
+		print(get_shortest_unique_substring(char_arrs[i], strings[i]))

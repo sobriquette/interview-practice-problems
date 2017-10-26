@@ -54,50 +54,21 @@ class Solution:
 
 import random
 class Solution:
-	class ArrayDict:
+	class newSet:
 		def __init__(self):
-			self.my_dict = {} # will handle repeating numbers
-			self.my_list = []
+			self.my_set = ()
 
 		def insert(self, n):
-			self.my_list.append(n)
-			last_idx = len(self.my_list) - 1
-
-			# Tracks indices of number n, if it repeats
-			# E.g. [1, 1, 3, 6, 8, 6] --> '6': [3, 5]
-			if n in self.my_dict:
-				my_dict[n].append(last_idx)
-			else:
-				my_dict[n] = [last_idx]
+			self.my_set.add(n)
 
 		def remove(self, n):
-			if n not in self.my_dict:
-				raise KeyError("This element does not exist")
-
-			indices = self.my_dict[n]
-
-			# go backwards to maintain O(1) pop()
-			for idx in reversed(indices):
-				last_idx = len(self.my_list) - 1
-				last_n = self.my_list[last_idx]
-				# swap the number to be removed
-				# with the last element of the list
-				self.my_list[last_idx], self.my_list[idx] = \
-				self.my_list[idx], self.my_list[last_idx]
-
-				self.my_list.pop() # remove from list
-				self.my_list[last_n] = idx # update index for n that was swapped
-				self.my_dict[n].pop() # remove from dict
-
-			# when all instances of number are removed from list
-			# remove from dictionary as well
-			self.my_dict.pop('n')
+			self.my_set.remove(n)
 
 		def get_random(self):
 			# assumes "equal probability" means that
 			# for each call to get_random(), 
 			# each number has equal P of being returned
-			return random.choice(self.my_list)
+			return random.choice(self.my_set)
 
 
 
