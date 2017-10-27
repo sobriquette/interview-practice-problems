@@ -25,14 +25,14 @@ class Solution1:
 
 		visited[course] = -1
 		for next_course in graph[course]:
-			if not self.dfs(next_course, graph, visited)
+			if not self.dfs(next_course, graph, visited):
 				return False
 
 		visited[course] = 1
 		return True
 
 class Solution2:
-	def can_finish(num_courses, prerequisites):
+	def can_finish(self, num_courses, prerequisites):
 		graph = [set() for _ in range(num_courses)]
 		in_degree = [0] * num_courses
 
@@ -56,3 +56,7 @@ class Solution2:
 					q.append(b)
 
 		return n == num_courses
+
+if __name__=="__main__":
+	sol = Solution2()
+	print(sol.can_finish(3, [(1,0) , (2,1), (0,2)]))
