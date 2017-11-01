@@ -10,10 +10,12 @@ def bubble_sort_iterative(arr):
 	swaps = 0
 
 	for i in range(len(arr) - 1):
+		print("arr {} at i = {}".format(arr, i))
 		for j in range(i, len(arr)):
 			if arr[j] < arr[i]:
 				arr[i], arr[j] = arr[j], arr[i]
 				swaps += 1
+			print("arr {} at i = {} and j = {}".format(arr, i, j))
 
 		# if there are no swaps for a whole pass
 		# we can return early since it is already sorted
@@ -40,7 +42,6 @@ def bubble_sort_recursive(arr, n):
 		if arr[i] > arr[i + 1]:
 			arr[i], arr[i + 1] = arr[i + 1], arr[i]
 
-	print("arr at {}: {}".format(n, arr))			
 	bubble_sort_recursive(arr, n - 1)
 
 	return arr
@@ -53,5 +54,6 @@ if __name__=="__main__":
 			break
 
 		arr = list(map(int, response.split()))
-		print(bubble_sort_recursive(arr, len(arr)) == bubble_sort_iterative(arr))
+		print(bubble_sort_iterative(arr))
+		# print(bubble_sort_recursive(arr, len(arr)) == bubble_sort_iterative(arr))
 
