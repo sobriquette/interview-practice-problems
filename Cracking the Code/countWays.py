@@ -2,11 +2,10 @@ def count_ways_util(n, m):
 	if n <= 1:
 		return n
 	res = 0
-	i = 1
-	while i <= m and i <= n:
-		print("res: {} | i: {} | m: {} | n: {}".format(res, i , m, n))
-		res = res + count_ways_util(n - i, m)
-		i += 1
+	step = 1
+	while step <= m and step <= n:
+		res += count_ways_util(n - step, m)
+		step += 1
 
 	return res
 
@@ -17,13 +16,12 @@ def count_ways_memoized(n, m):
 	res = [0 for _ in range(n)]
 	res[0], res[1] = 1, 1
 
-	for i in range(2, n):
-		j = 1
-		while j <= m and j <= n:
-			res[i] = res[i] + res[i - j]
-			j += 1
-			print("res: {}, j: {}, i: {}".format(res, j, i))
-
+	for n_i in range(2, n):
+		step = 1
+		while step <= m and step <= n:
+			res[n_i] += res[n_i - step]
+			step += 1
+			
 	return res[n - 1]
 
 
