@@ -4,11 +4,12 @@ def reverse_words(arr):
 	# reverse individual words in array
 	w_start = None
 	for idx, c in enumerate(arr):
-		if c == " ":
+		if c == ' ':
 			if w_start is not None:
 				mirrorReverse(arr, w_start, idx - 1)
 				w_start = None
 		elif idx == len(arr) - 1:
+			if w_start is not None:
 				mirrorReverse(arr, w_start, idx)
 		else:
 			if w_start is None:
@@ -23,5 +24,5 @@ def mirrorReverse(arr, start, end):
 		end -= 1
 
 if __name__=="__main__":
-	arr = ['p','r','a','c','t','i','c','e',' ','m','a','k','e','s',' ','p','e','r','f','e','c','t']
+	arr = ['a', ' ']
 	print(reverse_words(arr))
