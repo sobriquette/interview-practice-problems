@@ -20,7 +20,7 @@ class MinHeap:
 	def right(self, i):
 		return ((2 * i) + 2)
 
-	def swap(idx1, idx2):
+	def swap(self, idx1, idx2):
 		self.heap[idx1], self.heap[idx2] = self.heap[idx2], self.heap[idx1]
 
 	def get_min(self):
@@ -30,7 +30,7 @@ class MinHeap:
 		return self.heap[0]
 
 	# bubble up elements if they are smaller than parent
-	def check_minheap_property(idx, parent_of_idx):
+	def check_minheap_property(self, idx, parent_of_idx):
 		while idx != 0 and self.heap[parent_of_idx] > self.heap[idx]:
 			self.swap(idx, parent_of_idx)
 			idx = parent(idx)

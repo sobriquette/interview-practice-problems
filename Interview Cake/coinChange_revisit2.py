@@ -45,3 +45,5 @@ def change_bottom_up(amount, denominations):
 			ways[amount_left] += ways[amount_left - coin]
 
 	return ways[amount]
+
+print(change_top_down(4, [1,2,3,4], 0))
