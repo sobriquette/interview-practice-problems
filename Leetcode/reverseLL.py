@@ -17,11 +17,12 @@ class Solution:
 
 	def reverse_list_2(self, node):
 		prev = None
-		while node:
-			curr = node
-			node = node.next
+		curr = node
+		while curr:
+			nxt = curr.next
 			curr.next = prev
 			prev = curr
+			curr = nxt
 
 		return prev
 

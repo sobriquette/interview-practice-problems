@@ -1,3 +1,28 @@
+# 01/05/2018
+def compress_string(s):
+	char_count = 1
+	curr_char = s[0]
+	res = []
+
+	for idx, char in enumerate(s):
+		if idx == 0:
+			continue
+		if char == curr_char:
+			char_count += 1
+		else:
+			res.append(curr_char, char_count)
+			curr_char = char
+			char_count = 1
+
+	res.append(curr_char, char_count)
+	final_string = ''.join(res)
+
+	if len(final_string) >= len(s):
+		return s
+	else:
+		return final_string
+
+# 2017
 def compressString1(string):
 	length = len(string)
 	curr = 0

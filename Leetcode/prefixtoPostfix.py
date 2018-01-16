@@ -1,24 +1,22 @@
-def prefix_to_postfix(expression):
-	ops = '/*+-'
-	opstack = []
-	output = ''
+def prefix_to_postfix(exp):
+	operators = '*/+-'
+	operands = []
 
-	for token in reversed(expression):
-		if token not in ops:
-			opstack.append(token)
+	for char in reversed(exp):
+		if char in operators:
+			curr_exp = ''
+			ops_count = 0
+			while operands and ops_count < 2:
+				curr_exp += operands.pop()
+				ops_count += 1
+			operands.append(curr_exp + char)
 		else:
-			tmp = ''
-			cnt = 0
-			while opstack and cnt < 2:
-				tmp += opstack.pop()
-				cnt += 1
+			operands.append(char)
 
-			tmp += token
-			opstack.append(tmp)
+	res = ''
+	while operands:
+		res += operands.pop()
 
-	while opstack:
-		output += opstack.pop()
-
-	return output
+	return res
 
 print(prefix_to_postfix('+-435'))

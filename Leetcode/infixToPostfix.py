@@ -1,30 +1,26 @@
-def infix_to_postfix(expression):
-	prec = { '/': 3, '*': 3, '+': 2, '-': 2, '(': 1 }
-	opstack = []
-	output = ''
+def convert_to_postfix(exp):
+	ops = { '(': 0, ')': 0, '*': 1, '/': 1, '+': 2, '-': 2 }
 
-	for char in expression:
-		if char == ' ':
-			continue
-		elif char == '(':
-			opstack.append(char)
+	ops, res = [], ''
+	num_ops = 0
+
+	for char in exp:
+		if char == '(':
+			ops.append(char)
+			num_ops += 1
 		elif char == ')':
-			top = opstack.pop()
-			while opstack and top != '(':
-				output += top
-				top = opstack.pop()
-		elif char in '/*+-':
-			top_idx = len(opstack) - 1
-			while opstack and prec[opstack[top_idx]] >= prec[char]:
-				output += opstack.pop()
-			opstack.append(char)
+			while ops and ops[num_ops] != ')':
+				res += ops.pop()
+		elif char in ops:
+			while ops and ops[num_ops] >= ops[char]:
+				res += ops.pop()
+				num_ops -= 1
+			ops.append(char)
 		else:
-			output += char
+			res += char
 
-	if opstack:
-		while opstack:
-			output += opstack.pop()
+	while ops:
+		res += ops.pop()
 
-	return output
-
-print(infix_to_postfix('(A + B) * C - (D - E) * (F + G)'))
+	return res
+	

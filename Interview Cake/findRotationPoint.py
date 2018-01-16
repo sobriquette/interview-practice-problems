@@ -1,3 +1,5 @@
+# Assumes the array is rotated
+
 def findRotationPoint(words):
 	left = 0
 	right = len(left) - 1

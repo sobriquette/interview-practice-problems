@@ -26,20 +26,22 @@ class Trie:
     def add(self, word):
         current_node = self.head
         word_finished = True
-        
+        idx = 0
+
         for i in range(len(word)):
             if word[i] in current_node.children:
                 current_node = current_node.children[word[i]]
             else:
                 word_finished = False
+                idx = i
                 break
         
         # For ever new letter, create a new child node
         if not word_finished:
-            while i < len(word):
-                current_node.addChild(word[i])
-                current_node = current_node.children[word[i]]
-                i += 1
+            while idx < len(word):
+                current_node.addChild(word[idx])
+                current_node = current_node.children[word[idx]]
+                idx += 1
         
         # Let's store the full word at the end node so we don't need to
         # travel back up the tree to reconstruct the word
@@ -86,7 +88,7 @@ class Trie:
         
         # Get words under prefix
         if top_node == self.head:
-            queue = [node for key, node in top_node.children.iteritems()]
+            queue = [node for key, node in top_node.children.items()]
         else:
             queue = [top_node]
         
@@ -99,7 +101,7 @@ class Trie:
                 # Isn't it nice to not have to go back up the tree?
                 words.append(current_node.data)
             
-            queue = [node for key,node in current_node.children.iteritems()] + queue
+            queue = [node for key,node in current_node.children.items()] + queue
         
         return words
     
@@ -114,6 +116,34 @@ class Trie:
             current_node = current_node[letter]
         
         return current_node.data
+
+class Trie2:
+    def __init__(self):
+        self.root_node = {}
+
+    def check_present_and_add(self, word):
+
+        current_node = self.root_node
+        is_new_word = False
+
+        # Work downwards through the trie, adding nodes
+        # as needed, and keeping track of whether we add
+        # any nodes.
+        for char in word:
+            if char not in current_node:
+                is_new_word = True
+                current_node[char] = {}
+            current_node = current_node[char]
+
+        # Explicitly mark the end of a word.
+        # Otherwise, we might say a word is
+        # present if it is a prefix of a different,
+        # longer word that was added earlier.
+        if "End Of Word" not in current_node:
+            is_new_word = True
+            current_node["End Of Word"] = {}
+
+        return is_new_word
 
 if __name__ == '__main__':
     """ Example use """

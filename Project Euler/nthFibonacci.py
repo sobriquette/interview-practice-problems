@@ -3,16 +3,18 @@
 # Approach 1: iterative, space optimized
 def fibIterative(n):
 	n1, n2 = 0, 1
-	fib = n1 + n2
 
 	if n < 0:
 		return "Input is incorrect"
+	elif n == 1:
+		return n1
+	elif n == 2:
+		return n2
+	else:
+		for i in range(2,n):
+			n1, n2 = n2, n1 + n2
 
-	for i in range(2,n):
-		fib = n1 + n2
-		n1, n2 = n2, fib
-
-	return fib
+	return n2
 
 # Runtime: O(n)
 # Space: O(1)
