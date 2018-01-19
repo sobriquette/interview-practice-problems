@@ -1,3 +1,6 @@
+"""
+Implementation on attempt #1: 08/07/2017
+"""
 # ({[]})()
 def validateStringParens(s):
 	opens = '({['

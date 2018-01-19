@@ -1,3 +1,28 @@
+"""
+Implementation for attempt #2: 08/09/2017
+"""
+def get_max_profit(stock_prices_yesterday):
+	if len(stock_prices_yesterday) < 2:
+		raise IndexError('need at least two stock prices to make a profit')
+
+	lowest_price = stock_prices_yesterday[0]
+	max_profit = stock_prices_yesterday[1] - stock_prices_yesterday[0]
+
+	for time, current_price in enumerate(stock_prices_yesterday):
+		# can't sell at the same time we buy (which is the initial lowest_price)
+		if time == 0:
+			continue
+
+		potential_profit = current_price - lowest_price
+
+		max_profit = max(max_profit, potential_profit)
+		lowest_price = min(lowest_price, current_price)
+
+	return max_profit
+
+"""
+Implementation for attempt #1: 03/24/2017
+"""
 # Find max profit from buying and selling 1 purchase of stock
 def negProfit(nums):
 	best_profit = -float("inf")
@@ -69,7 +94,6 @@ def greedyProfitSolution(nums):
 		min_price = min(min_price, curr_price)
 
 	return max_profit
-
 
 if __name__=="__main__":
 	nums = [[16, 7, 3, 20, 2, 10, 8], [10, 7, 5, 8, 11, 9], [1, 2 , 78, 2, 5], [1, 1, 1, 1], [], [15, 14, 12, 9, 5, 3, 1]]
