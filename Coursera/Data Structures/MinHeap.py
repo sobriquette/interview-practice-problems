@@ -34,7 +34,7 @@ class MinHeap:
 		while idx != 0 and self.heap[parent_of_idx] > self.heap[idx]:
 			self.swap(idx, parent_of_idx)
 			idx = parent(idx)
-			parent_of_idx = parent(idx)
+			parent_of_idx = parent(parent_of_idx)
 
 	def insert_key(self, k):
 		if self.size == self.capacity:

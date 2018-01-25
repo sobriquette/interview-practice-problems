@@ -6,8 +6,11 @@ class AVLTree:
 			self.left = None
 			self.height = 1
 
-	def __init__(self, root=None):
-		self.root = root
+	def get_balance(self, node):
+		if not node:
+			return 0
+
+		return self.get_height(node.left) - self.get_height(node.right)
 
 	def get_height(self, node):
 		if not node:
@@ -21,7 +24,7 @@ class AVLTree:
 
 		node.height = max(get_height(node.left), get_height(node.right)) + 1
 
-	def __rotate_right(self, node):
+	def rotate_right(self, node):
 		if not node:
 			return node
 
@@ -36,3 +39,46 @@ class AVLTree:
 
 		return sub
 
+	def rotate_left(self, node):
+		if not node:
+			return node
+
+		sub = node.right
+		t2 = sub.left
+
+		sub.left = node
+		node.right = t2
+
+		self.update_height(node)
+		self.update_height(sub)
+
+		return sub
+
+	def insert(self, root, data):
+		if not root:
+			return Node(data)
+		elif data < self.root.data:
+			root.left = self.insert(root.left, data)
+		else:
+			root.right = self.insert(root.right, data)
+
+		root.height = self.update_height(root)
+		balance = self.get_balance(root)
+
+		# Case 1: Left-Left
+		if balance > 1 and data < root.left.data:
+			return self.rotate_right(root)
+
+		# Case 2: Right-Right
+		if balance < -1 and data > root.right.data:
+			return self.rotate_left(root)
+
+		# Case 3: Left-Right
+		if balance > 1 and data > root.left.data:
+			root.left = self.rotate_left(root.left)
+			return self.rotate_right(root)
+
+		# Case 4: Right-Left
+		if balance < -1 and data < root.right.data:
+			root.right = self.rotate_right(root.right)
+			return self.rotate_left(root)
