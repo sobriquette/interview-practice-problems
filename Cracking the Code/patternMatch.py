@@ -22,7 +22,7 @@ def matches(pattern, value, main_size, alt_size, alt_idx):
 		str_idx += size
 	return True
 
-def is_equal(s1, offset1, s2, offset2):
+def is_equal(s1, offset1, offset2, size):
 	for i in range(size):
 		if s1[offset1 + i] != s1[offset2 + i]:
 			return False
@@ -42,16 +42,16 @@ def is_match(pattern, value):
 	pat_alt_idx = pattern.index(pat_alt)
 	max_main_size = size // pat_main_cnt
 
-	for main_size in range(max_main_size):
+	for main_size in range(max_main_size + 1):
 		rem_size = size - main_size * pat_main_cnt
 		if pat_alt_cnt == 0 or rem_size % pat_alt_cnt == 0:
 			alt_idx = pat_alt_idx * main_size
+			alt_size = 0 if pat_alt_cnt == 0 else (rem_size // pat_alt_cnt)
 
-			alt_size = 0
-			if pat_alt_cnt > 0:
-				alt_size = rem_size // pat_alt_cnt
-
+			print("ms: {} | alt_size: {} | alt_idx: {}".format(main_size, alt_size, alt_idx))
 			if matches(pattern, value, main_size, alt_size, alt_idx):
 				return True
 
 	return False
+
+print(is_match('abba', 'blueredbluered'))
